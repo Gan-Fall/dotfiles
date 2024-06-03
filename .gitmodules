@@ -1,0 +1,3 @@
+[submodule "src/dwm"]
+	path = src/dwm
+	url = git@github.com:Gan-Fall/dwm.git
