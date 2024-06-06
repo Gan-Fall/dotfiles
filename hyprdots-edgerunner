@@ -1,39 +1,39 @@
 ! special
-*.foreground:   #f1f1f1
-*.background:   #1a1a1a
-*.cursorColor:  #f1f1f1
+*.foreground: #FDF500
+*.background: #000000
+*.cursorColor: #FADA16
 
 ! black
-*.color0:       #121212
-*.color8:       #666666
+*.color0: #1F2229
+*.color8: #1B1C22
 
 ! red
-*.color1:       #a52aff
-*.color9:       #ba5aff
+*.color1: #D62246
+*.color9: #EC0101
 
 ! green
-*.color2:       #7129ff
-*.color10:      #905aff
+*.color2:  #4DBD4F
+*.color10: #1F5322
 
 ! yellow
-*.color3:       #3d2aff
-*.color11:      #685aff
+*.color3:  #FDF500
+*.color11: #F2CB07
 
 ! blue
-*.color4:       #2b4fff
-*.color12:      #5c78ff
+*.color4:  #F29C6B
+*.color12: #FFA6C2
 
 ! magenta
-*.color5:       #2883ff
-*.color13:      #5ea2ff
+*.color5:  #A56DF2
+*.color13: #564873
 
 ! cyan
-*.color6:       #28b9ff
-*.color14:      #5ac8ff
+*.color6:  #2CF6B3
+*.color14: #37EBF3
 
 ! white
-*.color7:       #f1f1f1
-*.color15:      #ffffff
+*.color7:  #E6E6E6
+*.color15: #FFFFFF
 
 !! Urxvt Appearance
 URxvt.font: xft:mono:pixelsize=14:antialias=true
