@@ -1,0 +1,67 @@
+! special
+*.foreground: #FF2A6D
+*.background: #000000
+*.cursorColor: #05D9E8
+
+! black
+*.color0: #272932
+*.color8: #1F2229
+
+! red
+*.color1: #710000
+*.color9: #FF2A6D
+
+! green
+*.color2:  #1AC5B0
+*.color10: #9AF2E7
+
+! yellow
+*.color3:  #FDF500
+*.color11: #FFFC98
+
+! blue
+*.color4:  #01012B
+*.color12: #4949FB
+
+! magenta
+*.color5:  #CB1DCD
+*.color13: #E455AE
+
+! cyan
+*.color6:  #37EBF3
+*.color14: #9370DB
+
+! white
+*.color7:  #D1C5C0
+*.color15: #FFFFFF
+
+!! dwm Appearance
+dwm.normbordercolor: #05D9E8
+dwm.normbgcolor:     #01012B
+dwm.normfgcolor:     #FF2A6D
+dwm.selbordercolor:  #FF2A6D
+dwm.selbgcolor:      #05D9E8
+dwm.selfgcolor:      #01012B
+
+!! Urxvt Appearance
+URxvt.font: xft:mono:pixelsize=14:antialias=true
+URxvt.letterspace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 4
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
+
+!! Urxvt Functions
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.perl-ext-common: default,resize-font
+URxvt.keysym.C-j: resize-font:smaller
+URxvt.keysym.C-k: resize-font:bigger
+URxvt.keysym.C-equal: resize-font:reset
