@@ -35,6 +35,14 @@
 *.color7:  #E6E6E6
 *.color15: #FFFFFF
 
+!! dwm Appearance
+dwm.normbordercolor: #5032AC
+dwm.normbgcolor:     #000000
+dwm.normfgcolor:     #FDF500
+dwm.selbordercolor:  #FADA16
+dwm.selbgcolor:      #FADA16
+dwm.selfgcolor:      #000000
+
 !! Urxvt Appearance
 URxvt.font: xft:mono:pixelsize=14:antialias=true
 URxvt.letterspace: 0
