@@ -4,8 +4,8 @@
 *.cursorColor: #FADA16
 
 ! black
-*.color0: #1F2229
-*.color8: #1B1C22
+*.color0: #000000
+*.color8: #272932
 
 ! red
 *.color1: #D62246
@@ -47,7 +47,7 @@ dwm.selfgcolor:      #000000
 URxvt.font: xft:mono:pixelsize=14:antialias=true
 URxvt.letterspace: 0
 URxvt.lineSpace: 0
-URxvt.geometry: 92x24
+URxvt.geometry: 400x400
 URxvt.internalBorder: 4
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: false
