@@ -44,7 +44,7 @@ dwm.selbgcolor:      #05D9E8
 dwm.selfgcolor:      #01012B
 
 !! Urxvt Appearance
-URxvt.font: xft:mono:pixelsize=14:antialias=true
+URxvt.font: xft:FiraCode Nerd Font Mono:pixelsize=22:antialias=true,xft:Symbols Nerd Font Mono:style=Regular:pixelsize=22:antialias=true
 URxvt.letterspace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 400x400

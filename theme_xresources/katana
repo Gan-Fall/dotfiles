@@ -1,0 +1,67 @@
+! special
+*.foreground:   #
+*.background:   #
+*.cursorColor:  #
+
+! black
+*.color0:       #
+*.color8:       #
+
+! red
+*.color1:       #
+*.color9:       #
+
+! green
+*.color2:       #
+*.color10:      #
+
+! yellow
+*.color3:       #
+*.color11:      #
+
+! blue
+*.color4:       #
+*.color12:      #
+
+! magenta
+*.color5:       #
+*.color13:      #
+
+! cyan
+*.color6:       #
+*.color14:      #
+
+! white
+*.color7:       #
+*.color15:      #
+
+!! dwm Appearance
+dwm.normbordercolor: #
+dwm.normbgcolor:     #
+dwm.normfgcolor:     #
+dwm.selbordercolor:  #
+dwm.selbgcolor:      #
+dwm.selfgcolor:      #
+
+!! Urxvt Appearance
+URxvt.font: xft:FiraCode Nerd Font Mono:pixelsize=22:antialias=true,xft:Symbols Nerd Font Mono:style=Regular:pixelsize=22:antialias=true
+URxvt.letterspace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 400x400
+URxvt.internalBorder: 4
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 24
+URxvt.iso14755: false
+
+!! Urxvt Functions
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.perl-ext-common: default,resize-font
+URxvt.keysym.C-j: resize-font:smaller
+URxvt.keysym.C-k: resize-font:bigger
+URxvt.keysym.C-equal: resize-font:reset
