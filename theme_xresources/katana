@@ -8,8 +8,8 @@
 *.color8:       #373b41
 
 ! red
-*.color1:       #a54242
-*.color9:       #cc6666
+*.color1:       #710000
+*.color9:       #a54242
 
 ! green
 *.color2:       #8c9440
@@ -38,7 +38,7 @@
 dwm.normbordercolor: #272932
 dwm.normbgcolor:     #272932
 dwm.normfgcolor:     #D1C5C0
-dwm.selbordercolor:  #710000
+dwm.selbordercolor:  #D1C5C0
 dwm.selbgcolor:      #D1C5C0
 dwm.selfgcolor:      #710000
 
