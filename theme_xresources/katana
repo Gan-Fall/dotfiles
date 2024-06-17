@@ -1,47 +1,46 @@
 ! special
-*.foreground:   #
-*.background:   #
-*.cursorColor:  #
+*.foreground:   #c5c8c6
+*.background:   #1d1f21
+*.cursorColor:  #c5c8c6
 
 ! black
-*.color0:       #
-*.color8:       #
+*.color0:       #282a2e
+*.color8:       #373b41
 
 ! red
-*.color1:       #
-*.color9:       #
+*.color1:       #a54242
+*.color9:       #cc6666
 
 ! green
-*.color2:       #
-*.color10:      #
-
+*.color2:       #8c9440
+*.color10:      #b5bd68
 ! yellow
-*.color3:       #
-*.color11:      #
+*.color3:       #de935f
+*.color11:      #f0c674
 
 ! blue
-*.color4:       #
-*.color12:      #
+*.color4:       #5f819d
+*.color12:      #81a2be
 
 ! magenta
-*.color5:       #
-*.color13:      #
+*.color5:       #85678f
+*.color13:      #b294bb
 
 ! cyan
-*.color6:       #
-*.color14:      #
+*.color6:       #5e8d87
+*.color14:      #8abeb7
 
 ! white
-*.color7:       #
-*.color15:      #
+*.color7:       #707880
+*.color15:      #c5c8c6
 
 !! dwm Appearance
-dwm.normbordercolor: #
-dwm.normbgcolor:     #
-dwm.normfgcolor:     #
-dwm.selbordercolor:  #
-dwm.selbgcolor:      #
-dwm.selfgcolor:      #
+dwm.normbordercolor: #272932
+dwm.normbgcolor:     #272932
+dwm.normfgcolor:     #D1C5C0
+dwm.selbordercolor:  #710000
+dwm.selbgcolor:      #D1C5C0
+dwm.selfgcolor:      #710000
 
 !! Urxvt Appearance
 URxvt.font: xft:FiraCode Nerd Font Mono:pixelsize=22:antialias=true,xft:Symbols Nerd Font Mono:style=Regular:pixelsize=22:antialias=true
