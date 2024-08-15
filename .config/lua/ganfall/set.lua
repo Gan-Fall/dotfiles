@@ -18,7 +18,7 @@ vim.opt.wrap = false
 -- remove vim swapfile backups but keep undotree long list dir
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = "C:/Users/alehd/AppData/Local/nvim-data/undo"
 vim.opt.undofile = true
 
 -- no highlight all items in search and enable incremental search
