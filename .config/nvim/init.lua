@@ -1,2 +1,2 @@
-require("ganfall")
 require("config.lazy")
+require("ganfall")
