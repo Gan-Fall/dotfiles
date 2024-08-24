@@ -1,9 +1,6 @@
--- couldn't find any other clean way
-package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/dwm/luastatus/colorscheme/helper/?.lua"
-
 -- get the specific color table from helper.colorschemes module
-local c = require("colorschemes")["catppuccin_macchiato"]
-local fcolor = require("fcolor")
+local c = require("helper.colorschemes")["catppuccin_macchiato"]
+local fcolor = require("helper.fcolor")
 
 local color = {
 	-- separator
@@ -12,8 +9,8 @@ local color = {
 	-- date
 	date_ic_fg = fcolor("fg", c["crust"]),
 	date_ic_bg = fcolor("bg", c["red"]),
-	date_fg = fcolor("fg", c["crust"]),
-	date_bg = fcolor("bg", c["maroon"]),
+	date_fg = fcolor("fg", c["maroon"]),
+	date_bg = fcolor("bg", c["crust"]),
 
 	-- time
 	time_ic_fg = fcolor("fg", c["crust"]),
@@ -44,6 +41,12 @@ local color = {
 	brgn_ic_bg = fcolor("bg", c["crust"]),
 	brgn_fg = fcolor("fg", c["text"]),
 	brgn_bg = fcolor("bg", c["crust"]),
+
+	-- memory
+	mem_ic_fg = fcolor("fg", c["crust"]),
+	mem_ic_bg = fcolor("bg", c["peach"]),
+	mem_fg = fcolor("fg", c["peach"]),
+	mem_bg = fcolor("bg", c["crust"]),
 }
 
 return color
