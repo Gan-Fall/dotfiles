@@ -1,1 +1,5 @@
-return { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }
+return {
+    "nvim-treesitter/nvim-treesitter",
+    lazy=true,
+    build = ":TSUpdate"
+}

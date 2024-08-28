@@ -34,3 +34,6 @@ source <(fzf --zsh)
 
 # Aliases
 source /home/ganfall/.aliases
+
+# PATH
+source /home/ganfall/.path
