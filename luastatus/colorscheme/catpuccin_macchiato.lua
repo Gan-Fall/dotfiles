@@ -31,8 +31,8 @@ local color = {
 	btt_bg = fcolor("bg", c["crust"]),
 
 	-- volume
-	vol_ic_fg = fcolor("fg", c["mauve"]),
-	vol_ic_bg = fcolor("bg", c["crust"]),
+	vol_ic_fg = fcolor("fg", c["crust"]),
+	vol_ic_bg = fcolor("bg", c["mauve"]),
 	vol_fg = fcolor("fg", c["mauve"]),
 	vol_bg = fcolor("bg", c["crust"]),
 
