@@ -1,6 +1,0 @@
-#!/bin/bash
-sudo rm /etc/mkinitcpio.conf
-sudo rm /etc/modprobe.d/nvidia_drm.conf
-sudo cp /home/ganfall/Github/dotfiles/mkinitcpio/mkinitcpio_x.conf /etc/mkinitcpio.conf
-sudo cp /home/ganfall/Github/dotfiles/mkinitcpio/nvidia_drm_x.conf /etc/modprobe.d/nvidia_drm.conf
-sudo mkinitcpio -P
