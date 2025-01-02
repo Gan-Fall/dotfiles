@@ -79,5 +79,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 (map! "C-c C-c" 'evil-normal-state)
+(map! "C-d" '(evil-scroll-down evil-scroll-line-to-center))
+(map! "C-u" '(evil-scroll-up evil-scroll-line-to-center))
 (setq fill-column 80)
 (setq Display-Fill-Column-Indicator t)
