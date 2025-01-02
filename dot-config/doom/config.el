@@ -81,5 +81,6 @@
 (map! "C-c C-c" 'evil-normal-state)
 (map! "C-d" '(evil-scroll-down evil-scroll-line-to-center))
 (map! "C-u" '(evil-scroll-up evil-scroll-line-to-center))
-(setq fill-column 80)
-(setq Display-Fill-Column-Indicator t)
+(setq! fill-column 80)
+(setq! display-fill-column-indicator 't)
+(setq! global-display-fill-column-indicator-mode 't)
