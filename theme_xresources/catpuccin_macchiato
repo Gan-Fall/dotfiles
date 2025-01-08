@@ -61,7 +61,7 @@ dwm.urgbordercolor             : maroon
 dwm.urgfloatcolor              : red
 
 !! Urxvt Appearance
-URxvt.font: xft:FiraCode Nerd Font Mono:pixelsize=22:antialias=true,xft:Symbols Nerd Font Mono:style=Regular:pixelsize=22:antialias=true
+URxvt.font: xft:SpaceMono Nerd Font Mono:pixelsize=22:antialias=true,xft:Symbols Nerd Font Mono:style=Regular:pixelsize=22:antialias=true
 URxvt.letterspace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 400x400
@@ -74,6 +74,8 @@ URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.depth: 24
 URxvt.iso14755: false
+URxvt.background: crust
+URxvt.foreground: lavender
 
 !! Urxvt Functions
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
@@ -82,3 +84,6 @@ URxvt.perl-ext-common: default,resize-font
 URxvt.keysym.C-j: resize-font:smaller
 URxvt.keysym.C-k: resize-font:bigger
 URxvt.keysym.C-equal: resize-font:reset
+
+!! Emacs font
+Emacs.font: xft:SpaceMono Nerd Font Mono
