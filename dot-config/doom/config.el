@@ -29,14 +29,20 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
+;;(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 16)
+      ;;doom-variable-pitch-font (font-spec :family "FiraCode Nerd Font" :size 18)
+      ;;doom-big-font (font-spec :family "FiraCode Nerd Font Mono" :size 24)
+      ;;doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 16))
+
+(setq doom-font (font-spec :family "SpaceMono Nerd Font Mono" :size 18)
+      doom-variable-pitch-font (font-spec :family "SpaceMono Nerd Font" :size 20)
+      doom-big-font (font-spec :family "SpaceMono Nerd Font Mono" :size 26)
+      doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 18))
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-;;(setq doom-theme 'doom-one)
-(setq doom-font (font-spec :family "SpaceMono Nerd Font Mono" :size 16 :weight 'light)
-      doom-symbol-font (font-spec :family "Symbols Nerd Font Mono")
-      doom-big-font (font-spec :family "SpaceMono Nerd Font Mono" :size 24))
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-tokyo-night)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -44,7 +50,8 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Documents/Org")
+(setq org-roam-directory "~/Documents/Org")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -78,9 +85,27 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(map! "C-c C-c" 'evil-normal-state)
-(map! "C-d" '(evil-scroll-down evil-scroll-line-to-center))
-(map! "C-u" '(evil-scroll-up evil-scroll-line-to-center))
-(setq! fill-column 80)
-(setq! display-fill-column-indicator 't)
-(setq! global-display-fill-column-indicator-mode 't)
+;;(after! evil
+  ;;(map! "C-d" '(evil-scroll-down evil-scroll-line-to-center))
+  ;;(map! "C-u" '(evil-scroll-up evil-scroll-line-to-center)))
+(org-roam-db-autosync-mode)
+(after! doom
+  (setq fill-column 80)
+  ;;(setq display-fill-column-indicator 't)
+  (setq global-display-fill-column-indicator-mode 't)
+  (setq display-fill-column-indicator-character '│))
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after doom ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+    :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
