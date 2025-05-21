@@ -11,5 +11,3 @@ mkinitcpio
 
 src
 theme_xresources
-
-.config/doom
