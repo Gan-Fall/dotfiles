@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DIR_TABLE="$( echo $0 | sed s/git-watch/.git-watch-dirs/)"
+START="$(pwd)"
+touch "$DIR_TABLE"
+
+if [ -z $1 ]; then
+
+    while read p; do
+        echo "$p status:"
+        cd $p
+        git status -s
+    done <$DIR_TABLE
+    cd $START
+
+elif [ $1 = "add" ]; then
+
+    echo "$(pwd)" >> $DIR_TABLE
+
+elif [ $1 = "show" ]; then
+
+    cat $DIR_TABLE
+
+fi
+
