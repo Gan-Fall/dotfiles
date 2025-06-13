@@ -16,4 +16,4 @@ set_path(){
     done
 }
 
-set_path ~/.bin ~/.config/emacs/bin
+set_path ~/.local/bin ~/.config/emacs/bin

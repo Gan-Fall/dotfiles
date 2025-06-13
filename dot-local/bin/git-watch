@@ -7,9 +7,12 @@ touch "$DIR_TABLE"
 if [ -z $1 ]; then
 
     while read p; do
-        echo "$p status:"
         cd $p
-        git status -s
+        CMD_OUTPUT="$(git status -s)"
+        if [ -n "$CMD_OUTPUT" ]; then
+            echo "$p status:
+            $CMD_OUTPUT"
+        fi
     done <$DIR_TABLE
     cd $START
 
