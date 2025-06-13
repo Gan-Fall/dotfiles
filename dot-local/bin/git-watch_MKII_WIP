@@ -1,0 +1,32 @@
+#!/bin/bash
+
+DIR_TABLE="$( echo $0 | sed s/git-watch/.git-watch-dirs/)"
+touch $DIR_TABLE
+
+if [ -z $1 ]; then
+
+    echo "Error: No arguments provided"
+
+elif [ -n "$2" ]; then
+
+    echo "Error: Too many arguments"
+
+elif [ $1 = "add" ]; then
+
+    eval cat $DIR_TABLE | grep -xF "$(pwd)"
+    if [ -z $? ]; then
+        echo "Directory already being watched"
+    else
+        echo "$(pwd)" >> $DIR_TABLE
+    fi
+
+elif [ $1 = "remove" ]; then
+
+    while read p; do
+        echo "$p"
+    done <$DIR_TABLE
+
+elif [ $1 = "show" ]; then
+
+    echo "Hello"
+fi
