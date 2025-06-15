@@ -1,0 +1,3 @@
+dot-config/doom/custom.el
+dot-config/nvim/lazy-lock.json
+dot-local/bin/.git-watch-dirs
