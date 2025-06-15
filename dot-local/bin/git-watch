@@ -2,18 +2,31 @@
 
 DIR_TABLE="$( echo $0 | sed s/git-watch/.git-watch-dirs/)"
 START="$(pwd)"
+OUT_OF_DATE=""
 touch "$DIR_TABLE"
 
 if [ -z $1 ]; then
 
     while read p; do
         cd $p
+        PULL_STATUS="$(git pull)"
         CMD_OUTPUT="$(git status -s)"
         if [ -n "$CMD_OUTPUT" ]; then
             echo "$p status:
             $CMD_OUTPUT"
         fi
+        
+        if [ "$PULL_STATUS" = "Already up to date." ]; then
+            PULL_STATUS=""
+        else
+            OUT_OF_DATE="${OUT_OF_DATE}
+            $p"
+        fi
     done <$DIR_TABLE
+    if [ -n $OUT_OF_DATE ]; then
+        echo "The following repos are behind master:
+        ${OUT_OF_DATE}"
+    fi
     cd $START
 
 elif [ $1 = "add" ]; then
