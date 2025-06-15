@@ -16,6 +16,17 @@ if [ -z $1 ]; then
     done <$DIR_TABLE
     cd $START
 
+elif [ $1 = "fetch" ]; then
+
+    while read p; do
+        cd $p
+        CMD_OUTPUT="$(git fetch)"
+        if [ -n "$CMD_OUTPUT" ]; then
+            echo "$p: Merge pending"
+        fi
+    done <$DIR_TABLE
+    cd $START
+
 elif [ $1 = "add" ]; then
 
     echo "$(pwd)" >> $DIR_TABLE
