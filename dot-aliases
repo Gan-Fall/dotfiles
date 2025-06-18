@@ -1,0 +1,2 @@
+alias emacsale="emacsclient -c -a 'emacs'"
+alias rsync="rsync -avP"
