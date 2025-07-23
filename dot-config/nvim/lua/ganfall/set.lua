@@ -37,3 +37,10 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+-- Colorscheme
+
+-- If setting colorscheme to gruvbox-material
+vim.g.gruvbox_material_enable_italic = true
+
+vim.cmd.colorscheme('gruvbox-material')
