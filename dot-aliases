@@ -1,2 +1,12 @@
-alias emacsale="emacsclient -c -a 'emacs'"
+#alias emacsale="emacsclient -c -a 'emacs'"
+DWL_CMD="dbus-run-session dwl -s 'gentoo-pipewire-launcher &
+foot --server'"
 alias rsync="rsync -avP"
+alias shutdown="doas /sbin/shutdown -h now"
+alias reboot="doas /sbin/reboot"
+alias Hyprland="exec dbus-run-session Hyprland"
+alias dwl="${DWL_CMD}"
+alias niri="dbus-run-session niri --session"
+alias find-printers="driverless list"
+alias dl-audio="yt-dlp -x -f bestaudio"
+#alias pipe-screensaver="pipes.sh -r 0 -f 100"
