@@ -6,4 +6,6 @@
     :global-prefix "C-SPC")
   (rune/leader-keys
     "t" '(:ignore t :which-key "toggles")
-    "tt" '(load-theme :which-key "choose theme")) )
+    "tt" '(load-theme :which-key "choose theme")
+  )
+)
