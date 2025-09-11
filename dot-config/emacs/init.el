@@ -60,6 +60,7 @@
 (load "/home/ganfall/.config/emacs/packages.d/evil-numbers.el")
 (load "/home/ganfall/.config/emacs/packages.d/projectile.el")
 (load "/home/ganfall/.config/emacs/packages.d/magit.el")
+(load "/home/ganfall/.config/emacs/packages.d/org.el")
 (load "/home/ganfall/.config/emacs/packages.d/general.el") ;; Before last?
 (load "/home/ganfall/.config/emacs/packages.d/hydra.el") ;; Binding I made here depends on general.el
 (load "/home/ganfall/.config/emacs/packages.d/doom-themes.el") ;; Maybe load last?
