@@ -8,6 +8,26 @@
   :config
   (evil-mode)
   ; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join) ; Preserve emacs C-h to backspace
+
+  ;; Make screen recenter after jump
+  (defun my/evil-scroll-down ()
+    (interactive)
+    (evil-scroll-down nil)
+    (evil-scroll-line-to-center nil))
+  (defun my/evil-scroll-up ()
+    (interactive)
+    (evil-scroll-up nil)
+    (evil-scroll-line-to-center nil))
+
+
+  (evil-define-key '(normal visual) 'global (kbd "C-d") 'my/evil-scroll-down)
+  (evil-define-key '(normal visual) 'global (kbd "C-u") 'my/evil-scroll-up)
+
+  ;Alternate method
+  ;(define-key evil-normal-state-map (kbd "C-d") #'my/evil-scroll-down)
+  ;(define-key evil-normal-state-map (kbd "C-u") #'my/evil-scroll-up)
+
+  ; Make Control-g work like Control-c
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state))
 
   ;; Not sure what this does in system crafters' config

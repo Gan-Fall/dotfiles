@@ -87,7 +87,8 @@
   "-" '(evil-numbers/dec-at-pt :which-key "Decrease number(s)")
 
   ;; Magit
-  "g s" '(magit-status :which-key "Magit")
+  "g" '(:ignore t :which-key "Magit")
+  "g s" '(magit-status :which-key "Magit status")
 
   ;; Windows
   "w" '(:ignore t :which-key "windows")
