@@ -23,6 +23,9 @@
   (evil-define-key '(normal visual) 'global (kbd "C-d") 'my/evil-scroll-down)
   (evil-define-key '(normal visual) 'global (kbd "C-u") 'my/evil-scroll-up)
 
+  ;; Set return in normal state to do default action on object
+  (evil-define-key 'normal 'global (kbd "RET") 'embark-dwim)
+
   ;Alternate method
   ;(define-key evil-normal-state-map (kbd "C-d") #'my/evil-scroll-down)
   ;(define-key evil-normal-state-map (kbd "C-u") #'my/evil-scroll-up)
