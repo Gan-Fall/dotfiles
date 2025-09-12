@@ -57,6 +57,7 @@
 (load "/home/ganfall/.config/emacs/packages.d/evil.el")
 (load "/home/ganfall/.config/emacs/packages.d/evil-collection.el")
 (load "/home/ganfall/.config/emacs/packages.d/evil-numbers.el")
+(load "/home/ganfall/.config/emacs/packages.d/evil-surround.el")
 (load "/home/ganfall/.config/emacs/packages.d/projectile.el")
 (load "/home/ganfall/.config/emacs/packages.d/magit.el")
 (load "/home/ganfall/.config/emacs/packages.d/org.el")
