@@ -26,6 +26,10 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; Same but for fill column
+(setq display-fill-column-indicator-column 80)
+(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+
 (which-key-mode)
 
 ;; Initialize package sources
