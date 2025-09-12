@@ -79,6 +79,7 @@
   "e ." '(embark-dwim :which-key "embark at point")
   "e e" '(embark-act :which-key "embark")
   "e b" '(embark-bindings :which-key "embark bindings")
+  "p v" '(dired-jump :which-key "Vim Ex")
   
   ;; Evil-numbers
   ;"C-a" '(evil-numbers/inc-at-pt :which-key "Increase number(s)") ; redundant with evil-numbers config
