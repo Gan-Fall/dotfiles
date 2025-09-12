@@ -1,13 +1,15 @@
-.git
-.gitmodules
-.gitignore
+\.git
+\.gitmodules
+\.gitignore
 
-README
-LICENSE
-
-install.sh
 luastatus
 mkinitcpio
-
 src
 theme_xresources
+
+.+~          # emacs backup files
+\#.*\#       # emacs autosave files
+
+# Comment out the emacs version you prefer, or manually link it
+doom
+emacs

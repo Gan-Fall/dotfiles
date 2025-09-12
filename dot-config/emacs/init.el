@@ -83,6 +83,7 @@
   "b" '(:ignore t :which-key "buffer")
   "b i" '(ibuffer :which-key "buffer edit")
   "b s" '(consult-buffer :which-key "buffer switch")
+  "b k" '(kill-buffer :which-key "buffer kill")
 
   ;; File browsing / Embark
   "." '(find-file :which-key "find-file")
