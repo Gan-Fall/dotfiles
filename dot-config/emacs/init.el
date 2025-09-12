@@ -76,6 +76,7 @@
 (load "/home/ganfall/.config/emacs/packages.d/general.el") ;; Before last?
 (load "/home/ganfall/.config/emacs/packages.d/hydra.el") ;; Binding I made here depends on general.el
 (load "/home/ganfall/.config/emacs/packages.d/doom-themes.el") ;; Maybe load last?
+;(load "/home/ganfall/.config/emacs/packages.d/rosepine.el") ;; Feel like using rosepine?
 ;; In theory load order shouldn't matter if I set :after keywords properly
 
 (rune/leader-keys
@@ -196,6 +197,7 @@
 
 (recentf-mode)
 
+;(load-theme 'rose-pine t)
 (load-theme 'doom-gruvbox t)
 
 (custom-set-variables
@@ -207,9 +209,11 @@
    '("f1e8339b04aef8f145dd4782d03499d9d716fdc0361319411ac2efc603249326"
      default))
  '(package-selected-packages
-   '(doom-modeline doom-themes embark-consult evil-collection
-		   evil-numbers general helpful hydra magit marginalia
-		   orderless projectile rainbow-delimiters vertico)))
+   '(autothemer doom-modeline doom-themes embark-consult evil-collection
+		evil-numbers evil-surround general helpful hydra magit
+		marginalia orderless org-bullets projectile
+		rainbow-delimiters undo-tree vertico
+		visual-fill-column)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
