@@ -61,6 +61,7 @@
 (load "/home/ganfall/.config/emacs/packages.d/projectile.el")
 (load "/home/ganfall/.config/emacs/packages.d/magit.el")
 (load "/home/ganfall/.config/emacs/packages.d/org.el")
+(load "/home/ganfall/.config/emacs/packages.d/undo-tree.el")
 (load "/home/ganfall/.config/emacs/packages.d/general.el") ;; Before last?
 (load "/home/ganfall/.config/emacs/packages.d/hydra.el") ;; Binding I made here depends on general.el
 (load "/home/ganfall/.config/emacs/packages.d/doom-themes.el") ;; Maybe load last?
@@ -91,6 +92,9 @@
   ;; Magit
   "g" '(:ignore t :which-key "Magit")
   "g s" '(magit-status :which-key "Magit status")
+
+  ;; Undo-tree
+  "u" '(undo-tree-visualize :which-key "Undo tree")
 
   ;; Windows
   "w" '(:ignore t :which-key "windows")

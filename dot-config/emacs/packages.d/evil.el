@@ -6,6 +6,7 @@
   (setq evil-want-C-u-scroll t)
   ; (setq evil-want-C-u-delete t) ; Whether C-u should delete indent in insert mode.
   :config
+  (evil-set-undo-system 'undo-tree)
   (evil-mode)
   ; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join) ; Preserve emacs C-h to backspace
 
