@@ -199,24 +199,3 @@
 
 ;(load-theme 'rose-pine t)
 (load-theme 'doom-gruvbox t)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("f1e8339b04aef8f145dd4782d03499d9d716fdc0361319411ac2efc603249326"
-     default))
- '(package-selected-packages
-   '(autothemer doom-modeline doom-themes embark-consult evil-collection
-		evil-numbers evil-surround general helpful hydra magit
-		marginalia orderless org-bullets projectile
-		rainbow-delimiters undo-tree vertico
-		visual-fill-column)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
