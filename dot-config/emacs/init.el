@@ -19,11 +19,10 @@
 ;; Line numbers
 (column-number-mode)
 (setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
+(global-display-line-numbers-mode 1)
 
 ;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-		term-mode-hook
+(dolist (mode '(term-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
