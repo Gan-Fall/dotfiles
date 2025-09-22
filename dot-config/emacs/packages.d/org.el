@@ -22,13 +22,143 @@
 (use-package org
   :hook ((org-mode . variable-pitch-mode)
 	 (org-mode . visual-line-mode))
+  :bind
+  (("C-c j" . org-capture)) ;; alternative for `describe-bindings'
   :custom
+  (org-clock-sound "~/Downloads/bell.wav")
   (org-ellipsis " ▾")
   (org-startup-indented t)
   (org-startup-with-inline-images t)
   (org-startup-with-latex-preview t)
   (org-hide-emphasis-markers t)
+  (org-read-date-force-compatible-dates nil)
+  (org-agenda-files
+    '("~/Documents/org/Agenda.org"
+     "~/Documents/org/Journal.org"
+     "~/Documents/org/Tasks.org"
+     "~/Documents/org/Archive.org"
+     "~/Documents/org/Habits.org"
+     "~/Documents/org/Birthdays.org"))
+  (org-agenda-start-with-log-mode t)
+  (org-log-done 'time)
+  (org-log-into-drawer t)
+  (org-habit-graph-column 60)
+  (org-todo-keywords
+    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+  (org-refile-targets
+    '(("Archive.org" :maxlevel . 1)
+      ("Tasks.org" :maxlevel . 1)))
+  (org-tag-alist
+	 '((:startgroup)
+	   ; Put mutually exclusive tags here
+	   ("unnegotiable" . ?u)
+	   ("somewhatoptional" . ?O)
+	   ("optional" . ?o)
+	   (:endgroup)
+	   (:startgroup)
+	   ("maxprio" . ?m)
+	   ("canwait" . ?c)
+	   ("noprio" . ?N)
+	   (:endgroup)
+	   ("@errand" . ?E)
+	   ("@home" . ?H)
+	   ("@work" . ?W)
+	   ("agenda" . ?a)
+	   ("emacs" . ?e)
+	   ("planning" . ?p)
+	   ("batch" . ?b)
+	   ("note" . ?n)
+	   ("idea" . ?i)))
+  ;; Configure custom agenda views
+  (org-agenda-custom-commands
+	 '(("d" "Dashboard"
+	    ((agenda "" ((org-deadline-warning-days 7)))
+	     (todo "NEXT"
+		   ((org-agenda-overriding-header "Next Tasks")))
+	     (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+	   ("n" "Next Tasks"
+	    ((todo "NEXT"
+		   ((org-agenda-overriding-header "Next Tasks")))))
+
+	   ("W" "Work Tasks" tags-todo "+work-email")
+
+	   ;; Low-effort next actions
+	   ("e" tags-todo "+TODO=\"TODO\"+Effort<15&+Effort>0"
+	    ((org-agenda-overriding-header "Low Effort Tasks")
+	     (org-agenda-max-todos 20)
+	     (org-agenda-files org-agenda-files)))
+
+	   ("w" "Workflow Status"
+	    ((todo "WAIT"
+		   ((org-agenda-overriding-header "Waiting on External")
+		    (org-agenda-files org-agenda-files)))
+	     (todo "REVIEW"
+		   ((org-agenda-overriding-header "In Review")
+		    (org-agenda-files org-agenda-files)))
+	     (todo "PLAN"
+		   ((org-agenda-overriding-header "In Planning")
+		    (org-agenda-todo-list-sublevels nil)
+		    (org-agenda-files org-agenda-files)))
+	     (todo "BACKLOG"
+		   ((org-agenda-overriding-header "Project Backlog")
+		    (org-agenda-todo-list-sublevels nil)
+		    (org-agenda-files org-agenda-files)))
+	     (todo "READY"
+		   ((org-agenda-overriding-header "Ready for Work")
+		    (org-agenda-files org-agenda-files)))
+	     (todo "ACTIVE"
+		   ((org-agenda-overriding-header "Active Projects")
+		    (org-agenda-files org-agenda-files)))
+	     (todo "COMPLETED"
+		   ((org-agenda-overriding-header "Completed Projects")
+		    (org-agenda-files org-agenda-files)))
+	     (todo "CANC"
+		   ((org-agenda-overriding-header "Cancelled Projects")
+		    (org-agenda-files org-agenda-files)))))))
+  (org-capture-templates
+    `(("t" "Tasks / Projects")
+      ("tt" "Task" entry (file+olp "~/Documents/org/Tasks.org" "Inbox")
+           "* TODO %?\n  %U\n %i" :empty-lines 1)
+      ("tr" "Task with ref" entry (file+olp "~/Documents/org/Tasks.org" "Inbox")
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+      ("j" "Journal Entries")
+      ("jj" "Journal" entry
+           (file+olp+datetree "~/Documents/org/Journal.org")
+           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+           :clock-in :clock-resume
+           :empty-lines 1)
+      ("jr" "Journal with ref" entry
+           (file+olp+datetree "~/Documents/org/Journal.org")
+           "* %<%I:%M %p> - %a :journal:reflink:\n\n%?\n\n"
+           :clock-in :clock-resume
+           :empty-lines 1)
+      ("jm" "Musing" entry
+           (file+olp+datetree "~/Documents/org/Journal.org")
+           "\n* %<%I:%M %p> - Journal :musing:\n\n%?\n\n"
+           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+           :clock-in :clock-resume
+           :empty-lines 1)
+
+      ("w" "Workflows")
+      ("we" "Checking Email" entry (file+olp+datetree "~/Documents/org/Journal.org")
+           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+      
+      ("h" "Habits")
+      ("hd" "Add Habit - Daily" entry (file "~/Documents/org/Habits.org")
+           "* TODO %? :habit:\nSCHEDULED: %(org-insert-time-stamp nil nil nil nil nil \" +1d\")\n:PROPERTIES:\n:STYLE:    habit\n:END:" :empty-lines 0)
+
+      ("m" "Metrics Capture")
+      ("mw" "Weight" table-line (file+headline "~/Documents/org/Metrics.org" "Weight")
+       "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
   :config
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  ;; Save Org buffers after refiling!
+  ;(add-advice 'org-refile :after 'org-save-all-org-buffers)
   (efs/org-font-setup))
 
 (use-package org-bullets

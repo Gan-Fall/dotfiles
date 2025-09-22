@@ -196,6 +196,10 @@
   "w C-S-j" '(evil-window-move-very-bottom :which-key "Move window to very bottom")
 )
 
+;;Org capture keybind
+(define-key global-map (kbd "C-c j")
+    (lambda () (interactive) (org-capture nil nil)))
+
 (recentf-mode)
 
 ;(load-theme 'rose-pine t)
