@@ -1,3 +1,8 @@
+#+title: Emacs From Scratch Configuration
+#+PROPERTY: header-args:emacs-lisp :tangle ./init.el :mkdirp yes
+* Basic Configs
+** User Interface
+#+begin_src emacs-lisp
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1)        ; Disable visible scrollbar
@@ -38,7 +43,10 @@
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
 (which-key-mode)
+#+end_src
 
+** Use-Package
+#+begin_src emacs-lisp
 ;; Initialize package sources
 (require 'package)
 
@@ -55,13 +63,22 @@
    (package-install 'use-package))
 
 (require 'use-package)
+#+end_src
 
+*** Always Ensure
+#+begin_src emacs-lisp
 (setq use-package-always-ensure t)
+#+end_src
 
+* Doom-Modeline 
+#+begin_src emacs-lisp
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
+#+end_src
 
+* Vertico - Savehist - Orderless
+#+begin_src emacs-lisp
 ;; Enable Vertico.
 (use-package vertico
   ;;:custom
@@ -102,7 +119,10 @@
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
 
+* Marginalia
+#+begin_src emacs-lisp
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
@@ -118,7 +138,10 @@
   ;; the mode gets enabled right away. Note that this forces loading the
   ;; package.
   (marginalia-mode))
+#+end_src
 
+* Embark
+#+begin_src emacs-lisp
 (use-package embark
   :ensure t
 
@@ -152,7 +175,10 @@
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
                  (window-parameters (mode-line-format . none)))))
+#+end_src
 
+* Consult
+#+begin_src emacs-lisp
 ;; Example configuration for Consult
 (use-package consult
   ;; Replace bindings. Lazily loaded by `use-package'.
@@ -256,13 +282,19 @@
   ;; You may want to use `embark-prefix-help-command' or which-key instead.
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
   )
+#+end_src
 
+* Embark-Consult
+#+begin_src emacs-lisp
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
   :after (embark consult)
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+#+end_src
 
+* Helpful
+#+begin_src emacs-lisp
 (use-package helpful
   :bind (("C-h f" . helpful-callable)
 	 ("C-h v" . helpful-variable)
@@ -270,17 +302,24 @@
 	 ("C-h x" . helpful-command)
 	 ("C-h F" . helpful-function)
 	 ("C-h C-." . helpful-at-point)) )
+#+end_src
 
-(use-package rainbow-delimiters
-   :hook (emacs-lisp-mode scheme-mode lisp-mode))
+* Rainbow-delimeters
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :hook (emacs-lisp-mode scheme-mode lisp-mode))
 
-;; Alternate way to achieve this
- ;(dolist (mode '(emacs-lisp-mode-hook
- ;		scheme-mode-hook
- ;		lisp-mode-hook))
- ;  (add-hook mode #'rainbow-delimiters-mode))
- ;(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+ ;; Alternate way to achieve this
+  ;(dolist (mode '(emacs-lisp-mode-hook
+  ;		scheme-mode-hook
+  ;		lisp-mode-hook))
+  ;  (add-hook mode #'rainbow-delimiters-mode))
+  ;(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+#+end_src
 
+* Evil
+** Core
+#+begin_src emacs-lisp
 (use-package evil
   :init
   ; (setq evil-want-integration t) ; Not sure if deprecated.
@@ -327,7 +366,10 @@
   ;(evil-set-initial-state 'dashboard-mode 'normal)
 
 ;; Remember on certain buffers you might want to start on emacs mode instead of evil mode. If you find any add them here.
+#+end_src
 
+** Evil-numbers
+#+begin_src emacs-lisp
 (use-package evil-numbers
   :after evil
   :config
@@ -350,17 +392,28 @@
 )
 
 ; C-x ones are disabled for now as C-x is too important
+#+end_src
 
+** Evil-surround
+#+begin_src emacs-lisp
 (use-package evil-surround
   :after evil
   :config
   (global-evil-surround-mode 1))
+#+end_src
 
+** Evil-collection
+#+begin_src emacs-lisp
 (use-package evil-collection
   :after evil
   :config
   (evil-collection-init))
+#+end_src
 
+* TODO Projectile
+Fix this:
+- [ ] Don't use setq, use :custom
+#+begin_src emacs-lisp
 ;; System crafters setup
 ;(use-package projectile
 ;  :diminish projectile-mode
@@ -382,9 +435,16 @@
   (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
   (global-set-key (kbd "C-c p") 'projectile-command-map)
   (projectile-mode 1))
+#+end_src
 
+* Magit
+#+begin_src emacs-lisp
 (use-package magit)
+#+end_src
 
+* Org
+** Systemcrafters font-setup
+#+begin_src emacs-lisp
 (defun efs/org-font-setup ()
   ;; Set faces for heading levels
   (dolist (face '((org-level-1 . 1.2)
@@ -405,7 +465,10 @@
   (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+#+end_src
 
+** Core + Agenda
+#+begin_src emacs-lisp
 (use-package org
   :hook ((org-mode . variable-pitch-mode)
 	 (org-mode . visual-line-mode))
@@ -547,17 +610,27 @@
   ;; Save Org buffers after refiling!
   ;(add-advice 'org-refile :after 'org-save-all-org-buffers)
   (efs/org-font-setup))
+#+end_src
 
+** Org-bullets
+#+begin_src emacs-lisp
 (use-package org-bullets
   :after org
   :hook org-mode)
+#+end_src
 
+** Visual-fill-column
+This is the package that makes the org documents look "centered" like Word.
+#+begin_src emacs-lisp
 (use-package visual-fill-column
   :custom
   (visual-fill-column-width 100)
   (visual-fill-column-center-text t)
   :hook org-mode)
+#+end_src
 
+** Babel
+#+begin_src emacs-lisp
 (require 'org-tempo)
 
 (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
@@ -580,20 +653,47 @@
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+#+end_src
 
+
+** TODO Pomodoro function
+#+begin_src emacs-lisp :tangle no
+(defun my/pomodoro (pomodoros break?)
+  (interactive "p")
+  (if (> pomodoros 0)
+      (begin
+       (if break?
+	   (org-timer-set-timer 5)
+	   (org-timer-set-timer 25))
+       (my/pomodoro (- pomodoros 1) t) ))
+#+end_src
+
+
+** REVIEW Template capture keybind
+Not sure if redundant
+#+begin_src emacs-lisp
 ;;Org capture keybind
 (define-key global-map (kbd "C-c j")
     (lambda () (interactive) (org-capture nil nil)))
+#+end_src
 
+* Undo-tree
+#+begin_src emacs-lisp
 (use-package undo-tree
   :custom
   (undo-tree-enable-undo-in-region t))
 (global-undo-tree-mode 1)
+#+end_src
 
+** Compress undo history files with zstd
+#+begin_src emacs-lisp
 (defadvice undo-tree-make-history-save-file-name
     (after undo-tree activate)
   (setq ad-return-value (concat ad-return-value ".zst")))
+#+end_src
 
+* General.el
+#+begin_src emacs-lisp
 (use-package general
   :config
   (general-create-definer rune/leader-keys
@@ -605,9 +705,15 @@
     "tt" '(load-theme :which-key "choose theme")
   )
 )
+#+end_src
 
+* Hydra
+#+begin_src emacs-lisp
 (use-package hydra)
+#+end_src
 
+** Text-scale example
+#+begin_src emacs-lisp
 (defhydra hydra-text-scale ()
 	  "scale text"
 	  ("j" text-scale-increase "in")
@@ -616,7 +722,10 @@
 
 (rune/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
+#+end_src
 
+* Doom-themes
+#+begin_src emacs-lisp
 (use-package doom-themes
   :custom
   ;; Global settings (defaults)
@@ -635,7 +744,28 @@
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
+#+end_src
 
+* Rosepine Theme
+Requires the repository https://github.com/konrad1977/pinerose-emacs to be downloaded or at least linked to at the load path.
+#+begin_src emacs-lisp :tangle no
+(use-package autothemer)
+(use-package cl-lib)
+(add-to-list 'load-path "~/.config/emacs/packages.d/rose-pine-theme")
+(require 'rose-pine-theme)
+#+end_src
+
+To use this simply remove ":tangle no" and might wanna add it to doom-themes instead
+
+* TODO Paste from kill-ring buffer 0
+#+begin_src emacs-lisp :tangle no
+(defun my/paste ()
+  (interactive)
+  (evil-paste-from-register "\""))
+#+end_src
+
+* Spacemacs-like space leader functionality using general.el
+#+begin_src emacs-lisp
 (rune/leader-keys
   "b" '(:ignore t :which-key "buffer")
   "b i" '(ibuffer :which-key "buffer edit")
@@ -755,7 +885,14 @@
   "w C-S-k" '(evil-window-move-very-top :which-key "Move window to very top")
   "w C-S-j" '(evil-window-move-very-bottom :which-key "Move window to very bottom")
 )
+#+end_src
 
+* Recent files mode
+#+begin_src emacs-lisp
 (recentf-mode)
+#+end_src
 
+* Choose theme
+#+begin_src emacs-lisp
 (load-theme 'doom-gruvbox t)
+#+end_src
