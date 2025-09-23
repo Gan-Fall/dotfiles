@@ -170,3 +170,12 @@
   (visual-fill-column-width 100)
   (visual-fill-column-center-text t)
   :hook org-mode)
+
+(defun my/pomodoro (pomodoros break?)
+  (interactive "p")
+  (if (> pomodoros 0)
+      (begin
+       (if break?
+	   (org-timer-set-timer 5)
+	   (org-timer-set-timer 25))
+       (my/pomodoro (- pomodoros 1) t) )))

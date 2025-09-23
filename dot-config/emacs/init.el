@@ -79,6 +79,12 @@
 ;(load "/home/ganfall/.config/emacs/packages.d/rosepine.el") ;; Feel like using rosepine?
 ;; In theory load order shouldn't matter if I set :after keywords properly
 
+(defun my/paste ()
+  (interactive)
+  (evil-paste-from-register "\""))
+
+;; Old
+;; "Spacemacs" style where space is a leader key for most actions
 (rune/leader-keys
   "b" '(:ignore t :which-key "buffer")
   "b i" '(ibuffer :which-key "buffer edit")
@@ -94,7 +100,10 @@
   "e ." '(embark-dwim :which-key "embark at point")
   "e e" '(embark-act :which-key "embark")
   "e b" '(embark-bindings :which-key "embark bindings")
+
+  ;; Don't know what to call these
   "p v" '(dired-jump :which-key "Vim Ex")
+  "p p" '(my/paste :which-key "Paste from register 0")
   
   ;; Evil-numbers
   ;"C-a" '(evil-numbers/inc-at-pt :which-key "Increase number(s)") ; redundant with evil-numbers config
