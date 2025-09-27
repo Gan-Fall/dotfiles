@@ -3,46 +3,50 @@
 * Basic Configs
 ** User Interface
 #+begin_src emacs-lisp
-(setq inhibit-startup-message t)
+  (setq inhibit-startup-message t)
 
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
+  (scroll-bar-mode -1)        ; Disable visible scrollbar
+  (tool-bar-mode -1)          ; Disable the toolbar
+  (tooltip-mode -1)           ; Disable tooltips
+  (set-fringe-mode 10)        ; Give some breathing room
 
-(menu-bar-mode -1)            ; Disable the menu bar
+  (menu-bar-mode -1)            ; Disable the menu bar
 
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  ;; Make ESC quit prompts
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-;; Configure the bell
-(setq visible-bell t)
-;;(setq ring-bell-function 'ignore)
+  ;; Swap C-g and C-c
+(define-key key-translation-map (kbd "C-g") (kbd "C-c"))
+(define-key key-translation-map (kbd "C-c") (kbd "C-g"))
 
-(defvar runemacs/default-font-size 160)
-(set-face-attribute 'default nil :font "SpaceMono Nerd Font Mono" :height runemacs/default-font-size)
+  ;; Configure the bell
+  (setq visible-bell t)
+  ;;(setq ring-bell-function 'ignore)
 
-;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "SpaceMono Nerd Font Mono" :height 160)
+  (defvar runemacs/default-font-size 160)
+  (set-face-attribute 'default nil :font "SpaceMono Nerd Font Mono" :height runemacs/default-font-size)
 
-;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height 195 :weight 'regular)
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "SpaceMono Nerd Font Mono" :height 160)
 
-;; Line numbers
-(column-number-mode)
-(setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode 1)
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height 195 :weight 'regular)
 
-;; Disable line numbers for some modes
-(dolist (mode '(term-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  ;; Line numbers
+  (column-number-mode)
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode 1)
 
-;; Same but for fill column
-(setq display-fill-column-indicator-column 80)
-(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+  ;; Disable line numbers for some modes
+  (dolist (mode '(term-mode-hook
+  		eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(which-key-mode)
+  ;; Same but for fill column
+  (setq display-fill-column-indicator-column 80)
+  (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+
+  (which-key-mode)
 #+end_src
 
 ** Use-Package
