@@ -287,15 +287,15 @@
 
 (use-package evil
   :init
-  ; (setq evil-want-integration t) ; Not sure if deprecated.
+  					; (setq evil-want-integration t) ; Not sure if deprecated.
   (setq evil-want-keybinding nil) ; Remove some evil keybinds in other modes which according to system crafters "aren't consistent". TODO: Look into this.
-  ; (setq evil-want-C-i-jump nil) ; Remove vim C-i in edit mode functionality
+  					; (setq evil-want-C-i-jump nil) ; Remove vim C-i in edit mode functionality
   (setq evil-want-C-u-scroll t)
-  ; (setq evil-want-C-u-delete t) ; Whether C-u should delete indent in insert mode.
+  					; (setq evil-want-C-u-delete t) ; Whether C-u should delete indent in insert mode.
   :config
   (evil-set-undo-system 'undo-tree)
   (evil-mode)
-  ; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join) ; Preserve emacs C-h to backspace
+  					; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join) ; Preserve emacs C-h to backspace
 
   ;; Make screen recenter after jump
   (defun my/evil-scroll-down ()
@@ -306,29 +306,50 @@
     (interactive)
     (evil-scroll-up nil)
     (evil-scroll-line-to-center nil))
-
+  (defun my/evil-search-next ()
+    (interactive)
+    (evil-search-next)
+    (evil-scroll-line-to-center nil))
+  (defun my/evil-search-previous ()
+    (interactive)
+    (evil-search-previous)
+    (evil-scroll-line-to-center nil))
+  (defun my/evil-move-line-down ()
+    (interactive)
+    (evil-ex-execute "'<,'>m '>+1")
+    (evil-indent-line (point-at-bol) (point-at-eol))
+    (evil-visual-line))
+  (defun my/evil-move-line-up ()
+    (interactive)
+    (evil-ex-execute "'<,'>m '<-2")
+    (evil-indent-line (point-at-bol) (point-at-eol))
+    (evil-visual-line))
 
   (evil-define-key '(normal visual) 'global (kbd "C-d") 'my/evil-scroll-down)
   (evil-define-key '(normal visual) 'global (kbd "C-u") 'my/evil-scroll-up)
+  (evil-define-key '(normal visual) 'global (kbd "n") 'my/evil-search-next)
+  (evil-define-key '(normal visual) 'global (kbd "N") 'my/evil-search-previous)
+  (evil-define-key 'visual 'global (kbd "K") 'my/evil-move-line-up)
+  (evil-define-key 'visual 'global (kbd "J") 'my/evil-move-line-down)
 
   ;; Set return in normal state to do default action on object
   (evil-define-key 'normal 'global (kbd "RET") 'embark-dwim)
 
-  ;Alternate method
-  ;(define-key evil-normal-state-map (kbd "C-d") #'my/evil-scroll-down)
-  ;(define-key evil-normal-state-map (kbd "C-u") #'my/evil-scroll-up)
+  					;Alternate method
+  					;(define-key evil-normal-state-map (kbd "C-d") #'my/evil-scroll-down)
+  					;(define-key evil-normal-state-map (kbd "C-u") #'my/evil-scroll-up)
 
   ;; Disabled for now as I like jumping with relative numbers between folds.
-  ; J and K will go to the next "wrapped" line (i.e. the same line but wrapped because it is too long)
-   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  					; J and K will go to the next "wrapped" line (i.e. the same line but wrapped because it is too long)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-  ; Make Control-g work like Control-c
+  					; Make Control-g work like Control-c
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state))
 
-  ;; Not sure what this does in system crafters' config
-  ;(evil-set-initial-state 'messages-buffer-mode 'normal)
-  ;(evil-set-initial-state 'dashboard-mode 'normal)
+;; Not sure what this does in system crafters' config
+  					;(evil-set-initial-state 'messages-buffer-mode 'normal)
+  					;(evil-set-initial-state 'dashboard-mode 'normal)
 
 ;; Remember on certain buffers you might want to start on emacs mode instead of evil mode. If you find any add them here.
 
@@ -578,7 +599,7 @@
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.config/emacs/Emacs.org"))
+                      (expand-file-name "~/.dotfiles/emacs/Emacs.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
@@ -620,25 +641,6 @@
 
 (rune/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
-
-(use-package doom-themes
-  :custom
-  ;; Global settings (defaults)
-  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
-  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; for treemacs users
-  (doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  :config
-  (load-theme 'doom-one t)
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (nerd-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
 
 (rune/leader-keys
   "b" '(:ignore t :which-key "buffer")
@@ -762,4 +764,26 @@
 
 (recentf-mode)
 
+(use-package doom-themes
+  :custom
+  ;; Global settings (defaults)
+  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; for treemacs users
+  (doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  :config
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (nerd-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
 (load-theme 'doom-gruvbox t)
+
+(setq custom-file "~/.config/emacs/custom.el")
+(load custom-file)

@@ -324,52 +324,73 @@
 * Evil
 ** Core
 #+begin_src emacs-lisp
-(use-package evil
-  :init
-  ; (setq evil-want-integration t) ; Not sure if deprecated.
-  (setq evil-want-keybinding nil) ; Remove some evil keybinds in other modes which according to system crafters "aren't consistent". TODO: Look into this.
-  ; (setq evil-want-C-i-jump nil) ; Remove vim C-i in edit mode functionality
-  (setq evil-want-C-u-scroll t)
-  ; (setq evil-want-C-u-delete t) ; Whether C-u should delete indent in insert mode.
-  :config
-  (evil-set-undo-system 'undo-tree)
-  (evil-mode)
-  ; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join) ; Preserve emacs C-h to backspace
+  (use-package evil
+    :init
+    					; (setq evil-want-integration t) ; Not sure if deprecated.
+    (setq evil-want-keybinding nil) ; Remove some evil keybinds in other modes which according to system crafters "aren't consistent". TODO: Look into this.
+    					; (setq evil-want-C-i-jump nil) ; Remove vim C-i in edit mode functionality
+    (setq evil-want-C-u-scroll t)
+    					; (setq evil-want-C-u-delete t) ; Whether C-u should delete indent in insert mode.
+    :config
+    (evil-set-undo-system 'undo-tree)
+    (evil-mode)
+    					; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join) ; Preserve emacs C-h to backspace
 
-  ;; Make screen recenter after jump
-  (defun my/evil-scroll-down ()
-    (interactive)
-    (evil-scroll-down nil)
-    (evil-scroll-line-to-center nil))
-  (defun my/evil-scroll-up ()
-    (interactive)
-    (evil-scroll-up nil)
-    (evil-scroll-line-to-center nil))
+    ;; Make screen recenter after jump
+    (defun my/evil-scroll-down ()
+      (interactive)
+      (evil-scroll-down nil)
+      (evil-scroll-line-to-center nil))
+    (defun my/evil-scroll-up ()
+      (interactive)
+      (evil-scroll-up nil)
+      (evil-scroll-line-to-center nil))
+    (defun my/evil-search-next ()
+      (interactive)
+      (evil-search-next)
+      (evil-scroll-line-to-center nil))
+    (defun my/evil-search-previous ()
+      (interactive)
+      (evil-search-previous)
+      (evil-scroll-line-to-center nil))
+    (defun my/evil-move-line-down ()
+      (interactive)
+      (evil-ex-execute "'<,'>m '>+1")
+      (evil-indent-line (point-at-bol) (point-at-eol))
+      (evil-visual-line))
+    (defun my/evil-move-line-up ()
+      (interactive)
+      (evil-ex-execute "'<,'>m '<-2")
+      (evil-indent-line (point-at-bol) (point-at-eol))
+      (evil-visual-line))
 
+    (evil-define-key '(normal visual) 'global (kbd "C-d") 'my/evil-scroll-down)
+    (evil-define-key '(normal visual) 'global (kbd "C-u") 'my/evil-scroll-up)
+    (evil-define-key '(normal visual) 'global (kbd "n") 'my/evil-search-next)
+    (evil-define-key '(normal visual) 'global (kbd "N") 'my/evil-search-previous)
+    (evil-define-key 'visual 'global (kbd "K") 'my/evil-move-line-up)
+    (evil-define-key 'visual 'global (kbd "J") 'my/evil-move-line-down)
 
-  (evil-define-key '(normal visual) 'global (kbd "C-d") 'my/evil-scroll-down)
-  (evil-define-key '(normal visual) 'global (kbd "C-u") 'my/evil-scroll-up)
+    ;; Set return in normal state to do default action on object
+    (evil-define-key 'normal 'global (kbd "RET") 'embark-dwim)
 
-  ;; Set return in normal state to do default action on object
-  (evil-define-key 'normal 'global (kbd "RET") 'embark-dwim)
+    					;Alternate method
+    					;(define-key evil-normal-state-map (kbd "C-d") #'my/evil-scroll-down)
+    					;(define-key evil-normal-state-map (kbd "C-u") #'my/evil-scroll-up)
 
-  ;Alternate method
-  ;(define-key evil-normal-state-map (kbd "C-d") #'my/evil-scroll-down)
-  ;(define-key evil-normal-state-map (kbd "C-u") #'my/evil-scroll-up)
+    ;; Disabled for now as I like jumping with relative numbers between folds.
+    					; J and K will go to the next "wrapped" line (i.e. the same line but wrapped because it is too long)
+    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-  ;; Disabled for now as I like jumping with relative numbers between folds.
-  ; J and K will go to the next "wrapped" line (i.e. the same line but wrapped because it is too long)
-   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
-  ; Make Control-g work like Control-c
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state))
+    					; Make Control-g work like Control-c
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state))
 
   ;; Not sure what this does in system crafters' config
-  ;(evil-set-initial-state 'messages-buffer-mode 'normal)
-  ;(evil-set-initial-state 'dashboard-mode 'normal)
+    					;(evil-set-initial-state 'messages-buffer-mode 'normal)
+    					;(evil-set-initial-state 'dashboard-mode 'normal)
 
-;; Remember on certain buffers you might want to start on emacs mode instead of evil mode. If you find any add them here.
+  ;; Remember on certain buffers you might want to start on emacs mode instead of evil mode. If you find any add them here.
 #+end_src
 
 ** Evil-numbers
@@ -651,14 +672,13 @@ This is the package that makes the org documents look "centered" like Word.
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.config/emacs/Emacs.org"))
+                      (expand-file-name "~/.dotfiles/emacs/Emacs.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 #+end_src
-
 
 ** TODO Pomodoro function
 #+begin_src emacs-lisp :tangle no
@@ -671,7 +691,6 @@ This is the package that makes the org documents look "centered" like Word.
 	   (org-timer-set-timer 25))
        (my/pomodoro (- pomodoros 1) t) ))
 #+end_src
-
 
 ** REVIEW Template capture keybind
 Not sure if redundant
@@ -728,38 +747,6 @@ Not sure if redundant
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 #+end_src
 
-* Doom-themes
-#+begin_src emacs-lisp
-(use-package doom-themes
-  :custom
-  ;; Global settings (defaults)
-  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
-  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; for treemacs users
-  (doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  :config
-  (load-theme 'doom-one t)
-
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (nerd-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-#+end_src
-
-* Rosepine Theme
-Requires the repository https://github.com/konrad1977/pinerose-emacs to be downloaded or at least linked to at the load path.
-#+begin_src emacs-lisp :tangle no
-(use-package autothemer)
-(use-package cl-lib)
-(add-to-list 'load-path "~/.config/emacs/packages.d/rose-pine-theme")
-(require 'rose-pine-theme)
-#+end_src
-
-To use this simply remove ":tangle no" and might wanna add it to doom-themes instead
 
 * TODO Paste from kill-ring buffer 0
 #+begin_src emacs-lisp :tangle no
@@ -896,7 +883,52 @@ To use this simply remove ":tangle no" and might wanna add it to doom-themes ins
 (recentf-mode)
 #+end_src
 
-* Choose theme
+* Theme
+** Doom-themes
 #+begin_src emacs-lisp
-(load-theme 'doom-gruvbox t)
+(use-package doom-themes
+  :custom
+  ;; Global settings (defaults)
+  (doom-themes-enable-bold t)   ; if nil, bold is universally disabled
+  (doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  ;; for treemacs users
+  (doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  :config
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (nerd-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 #+end_src
+
+*** Choose the flavor
+#+begin_src emacs-lisp
+  (load-theme 'doom-gruvbox t)
+#+end_src
+
+** Rosepine Theme
+Requires the repository https://github.com/konrad1977/pinerose-emacs to be downloaded or at least linked to at the load path.
+#+begin_src emacs-lisp :tangle no
+(use-package autothemer)
+(use-package cl-lib)
+(add-to-list 'load-path "~/.config/emacs/packages.d/rose-pine-theme")
+(require 'rose-pine-theme)
+#+end_src
+
+To use this simply remove ":tangle no" and might wanna add it to doom-themes instead
+
+* Custom file
+#+begin_src emacs-lisp
+  (setq custom-file "~/.config/emacs/custom.el")
+  (load custom-file)
+#+end_src
+
+;; Local Variables: 
+;; eval: (add-hook 'after-save-hook (lambda ()(if (y-or-n-p "Reload?")(load-file user-init-file))) nil t) 
+;; eval: (add-hook 'after-save-hook (lambda ()(if (y-or-n-p "Tangle?")(org-babel-tangle))) nil t) 
+;; End:
