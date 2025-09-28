@@ -324,6 +324,12 @@
     (evil-ex-execute "'<,'>m '<-2")
     (evil-indent-line (point-at-bol) (point-at-eol))
     (evil-visual-line))
+  (defun my/evil-append-next-line ()
+    (interactive)
+    ;;122 is ASCII for 'z'
+    (evil-set-marker 122)
+    (evil-join (point-at-bol) (point-at-eol 1))
+    (evil-goto-mark 122))
 
   (evil-define-key '(normal visual) 'global (kbd "C-d") 'my/evil-scroll-down)
   (evil-define-key '(normal visual) 'global (kbd "C-u") 'my/evil-scroll-up)
@@ -331,6 +337,7 @@
   (evil-define-key '(normal visual) 'global (kbd "N") 'my/evil-search-previous)
   (evil-define-key 'visual 'global (kbd "K") 'my/evil-move-line-up)
   (evil-define-key 'visual 'global (kbd "J") 'my/evil-move-line-down)
+  (evil-define-key 'normal 'global (kbd "J") 'my/evil-append-next-line)
 
   ;; Set return in normal state to do default action on object
   (evil-define-key 'normal 'global (kbd "RET") 'embark-dwim)
