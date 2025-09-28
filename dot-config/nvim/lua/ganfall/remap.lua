@@ -1,4 +1,9 @@
 vim.g.mapleader = " "
+--Swap C-g to act as C-c
+--vim.keymap.set("v", "<C-g>", "<Esc>")
+--vim.keymap.set("i", "<C-g>", "<Esc>")
+--vim.keymap.set("n", "<C-g>", "<Esc>")
+
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("", "<leader>w", "<C-w>")
 
