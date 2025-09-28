@@ -712,6 +712,16 @@ Not sure if redundant
   (setq ad-return-value (concat ad-return-value ".zst")))
 #+end_src
 
+* Ripgrep
+#+begin_src emacs-lisp
+(use-package rg)
+#+end_src
+
+* Ag
+#+begin_src emacs-lisp
+(use-package ag)
+#+end_src
+
 * General.el
 #+begin_src emacs-lisp
 (use-package general
@@ -784,6 +794,9 @@ Not sure if redundant
     "p v" '(dired-jump :which-key "Vim Ex")
     "p p" '(my/paste :which-key "Paste from register 0")
     "s" '(my/replace-word :which-key "Find and replace all instances of word under cursor")
+    ;; Quickfix
+    "j" '(next-error :which-key "Cfix next")
+    "k" '(previous-error :which-key "Cfix previous")
     
     ;; Evil-numbers
     ;"C-a" '(evil-numbers/inc-at-pt :which-key "Increase number(s)") ; redundant with evil-numbers config

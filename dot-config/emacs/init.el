@@ -616,6 +616,10 @@
     (after undo-tree activate)
   (setq ad-return-value (concat ad-return-value ".zst")))
 
+(use-package rg)
+
+(use-package ag)
+
 (use-package general
   :config
   (general-create-definer rune/leader-keys
@@ -669,6 +673,9 @@
   "p v" '(dired-jump :which-key "Vim Ex")
   "p p" '(my/paste :which-key "Paste from register 0")
   "s" '(my/replace-word :which-key "Find and replace all instances of word under cursor")
+  ;; Quickfix
+  "j" '(next-error :which-key "Cfix next")
+  "k" '(previous-error :which-key "Cfix previous")
   
   ;; Evil-numbers
   ;"C-a" '(evil-numbers/inc-at-pt :which-key "Increase number(s)") ; redundant with evil-numbers config
