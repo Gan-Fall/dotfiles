@@ -649,6 +649,16 @@
 (rune/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
+(defun my/replace-word ()
+  (interactive)
+  (let ((replace-string (concat "%s/"
+		   (thing-at-point 'word 'no-properties)
+		   "//gI")))
+    (minibuffer-with-setup-hook
+	(lambda ()
+	  (backward-char 3))
+      (evil-ex replace-string))) )
+
 (rune/leader-keys
   "b" '(:ignore t :which-key "buffer")
   "b i" '(ibuffer :which-key "buffer edit")
@@ -668,6 +678,7 @@
   ;; Don't know what to call these
   "p v" '(dired-jump :which-key "Vim Ex")
   "p p" '(my/paste :which-key "Paste from register 0")
+  "s" '(my/replace-word :which-key "Find and replace all instances of word under cursor")
   
   ;; Evil-numbers
   ;"C-a" '(evil-numbers/inc-at-pt :which-key "Increase number(s)") ; redundant with evil-numbers config
