@@ -74,7 +74,7 @@ color = "#f5a97f"
 index = 17
 color = "#f4dbd6"
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 [font]
 normal = { family = "SpaceMono Nerd Font Mono", style = "Regular"}
@@ -82,3 +82,5 @@ bold = { family = "SpaceMono Nerd Font", style = "Bold"}
 italic = { family = "SpaceMono Nerd Font Mono", style = "Italic"}
 bold_italic = { family = "SpaceMono Nerd Font Mono", style = "Bold Italic"}
 size = 16
+
+[terminal]
