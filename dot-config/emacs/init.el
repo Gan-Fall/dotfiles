@@ -444,7 +444,7 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (use-package org
-  :hook ((org-mode . variable-pitch-mode)
+  :hook ((org-mode . variable-pitch-mode) ;; turn off if you can't use modus themes or mixed-pitch for some reason
 	 ;(org-mode . visual-line-mode)) ;; make text wrap underneath visually
 	 (org-mode . auto-fill-mode)) ;; make text actually wrap underneath
   :bind
@@ -592,10 +592,10 @@
   :hook org-mode)
 
 (use-package visual-fill-column
-    :custom
-    (visual-fill-column-width 100)
-    (visual-fill-column-center-text t)
-    :hook org-mode)
+  :custom
+  (visual-fill-column-width 100)
+  (visual-fill-column-center-text t)
+  :hook org-mode)
 
 (use-package mixed-pitch
   :hook

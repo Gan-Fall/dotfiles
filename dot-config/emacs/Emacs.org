@@ -504,34 +504,10 @@ Fix this:
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 #+end_src
 
-** Alternative fixed-pitch font-setup
-#+begin_src emacs-lisp :tangle no
-(defun ale/org-font-setup ()
-  ;; Set faces for heading levels
-  (dolist (face '(org-level-1
-                  org-level-2
-                  org-level-3
-                  org-level-4
-                  org-level-5
-                  org-level-6
-                  org-level-7
-                  org-level-8))
-    (set-face-attribute face nil :inherit 'fixed-pitch))
-
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
-#+end_src
-
 ** Core + Agenda
 #+begin_src emacs-lisp
     (use-package org
-      :hook ((org-mode . variable-pitch-mode)
+      :hook ((org-mode . variable-pitch-mode) ;; turn off if you can't use modus themes or mixed-pitch for some reason
     	 ;(org-mode . visual-line-mode)) ;; make text wrap underneath visually
     	 (org-mode . auto-fill-mode)) ;; make text actually wrap underneath
       :bind
@@ -690,7 +666,11 @@ This is the package that makes the org documents look "centered" like Word.
     (visual-fill-column-width 100)
     (visual-fill-column-center-text t)
     :hook org-mode)
+#+end_src
 
+** Mixed-pitch
+This is what makes it so relative line numbers do not shift lines right
+#+begin_src emacs-lisp
 (use-package mixed-pitch
   :hook
   ;; If you want it in all text modes:
