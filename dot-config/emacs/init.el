@@ -1,47 +1,51 @@
 (setq inhibit-startup-message t)
 
-  (scroll-bar-mode -1)        ; Disable visible scrollbar
-  (tool-bar-mode -1)          ; Disable the toolbar
-  (tooltip-mode -1)           ; Disable tooltips
-  (set-fringe-mode 10)        ; Give some breathing room
+(scroll-bar-mode -1)        ; Disable visible scrollbar
+(tool-bar-mode -1)          ; Disable the toolbar
+(tooltip-mode -1)           ; Disable tooltips
+(set-fringe-mode 10)        ; Give some breathing room
 
-  (menu-bar-mode -1)            ; Disable the menu bar
+(menu-bar-mode -1)            ; Disable the menu bar
 
-  ;; Make ESC quit prompts
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-  ;; Swap C-g and C-c
-(define-key key-translation-map (kbd "C-g") (kbd "C-c"))
-(define-key key-translation-map (kbd "C-c") (kbd "C-g"))
+;; Swap C-g and C-c
+;(define-key key-translation-map (kbd "C-g") (kbd "C-c"))
+;(define-key key-translation-map (kbd "C-c") (kbd "C-g"))
 
-  ;; Configure the bell
-  (setq visible-bell t)
-  ;;(setq ring-bell-function 'ignore)
+;; Configure the bell
+(setq visible-bell t)
+;;(setq ring-bell-function 'ignore)
 
-  (defvar runemacs/default-font-size 160)
-  (set-face-attribute 'default nil :font "SpaceMono Nerd Font Mono" :height runemacs/default-font-size)
+(defvar runemacs/default-font-size 160)
+(set-face-attribute 'default nil :font "SpaceMono Nerd Font Mono" :height runemacs/default-font-size)
 
-  ;; Set the fixed pitch face
-  (set-face-attribute 'fixed-pitch nil :font "SpaceMono Nerd Font Mono" :height 160)
+;; Set the fixed pitch face
+(set-face-attribute 'fixed-pitch nil :font "SpaceMono Nerd Font Mono" :height 160)
 
-  ;; Set the variable pitch face
-  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height 195 :weight 'regular)
+;; Set the variable pitch face
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height 195 :weight 'regular)
 
-  ;; Line numbers
-  (column-number-mode)
-  (setq display-line-numbers-type 'relative)
-  (global-display-line-numbers-mode 1)
+;; Line numbers
+(column-number-mode)
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode 1)
+;;TODO maybe fix Org mode not respecting this
+;(setq display-line-numbers-width-start 6)
+;(setq display-line-numbers-width 6) ;;Cap line numbers column width
+;(setq display-line-numbers-grow-only t) ;;Prevent line numbers column from shrinking down
 
-  ;; Disable line numbers for some modes
-  (dolist (mode '(term-mode-hook
+;; Disable line numbers for some modes
+(dolist (mode '(term-mode-hook
   		eshell-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-  ;; Same but for fill column
-  (setq display-fill-column-indicator-column 80)
-  (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+;; Same but for fill column
+(setq display-fill-column-indicator-column 80)
+(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
-  (which-key-mode)
+(which-key-mode)
 
 ;; Initialize package sources
 (require 'package)
@@ -441,7 +445,8 @@
 
 (use-package org
   :hook ((org-mode . variable-pitch-mode)
-	 (org-mode . visual-line-mode))
+	 ;(org-mode . visual-line-mode)) ;; make text wrap underneath visually
+	 (org-mode . auto-fill-mode)) ;; make text actually wrap underneath
   :bind
   (("C-c j" . org-capture)) ;; alternative for `describe-bindings'
   :custom
@@ -576,6 +581,7 @@
        "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
   :config
   (require 'org-habit)
+  (setopt display-line-numbers-width-start t)
   (add-to-list 'org-modules 'org-habit)
   ;; Save Org buffers after refiling!
   ;(add-advice 'org-refile :after 'org-save-all-org-buffers)
@@ -586,10 +592,15 @@
   :hook org-mode)
 
 (use-package visual-fill-column
-  :custom
-  (visual-fill-column-width 100)
-  (visual-fill-column-center-text t)
-  :hook org-mode)
+    :custom
+    (visual-fill-column-width 100)
+    (visual-fill-column-center-text t)
+    :hook org-mode)
+
+(use-package mixed-pitch
+  :hook
+  ;; If you want it in all text modes:
+  (text-mode . mixed-pitch-mode))
 
 (require 'org-tempo)
 
@@ -788,7 +799,7 @@
   ;; for treemacs users
   (doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
   :config
-  (load-theme 'doom-one t)
+  (load-theme 'doom-gruvbox t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
@@ -798,8 +809,6 @@
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
-
-(load-theme 'doom-gruvbox t)
 
 (setq custom-file "~/.config/emacs/custom.el")
 (load custom-file)
