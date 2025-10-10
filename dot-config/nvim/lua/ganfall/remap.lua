@@ -23,6 +23,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
+--For easier Emacs transition
+vim.keymap.set("v", "<C-g>", "<Esc>")
+vim.keymap.set("i", "<C-g>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
 
