@@ -619,6 +619,22 @@
 (define-key global-map (kbd "C-c j")
     (lambda () (interactive) (org-capture nil nil)))
 
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/Documents/org/roam")
+  (org-roam-completion-everywhere t)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n s" . org-roam-db-sync)
+         :map org-mode-map
+         ("C-M-i" . completion-at-point))
+  :config
+  (org-roam-setup))
+
 (use-package undo-tree
   :custom
   (undo-tree-enable-undo-in-region t))
@@ -698,6 +714,14 @@
   ;; Magit
   "g" '(:ignore t :which-key "Magit")
   "g s" '(magit-status :which-key "Magit status")
+
+  ;; Org-roam
+  "n" '(:ignore t :which-key "Node")
+  "n l" '(org-roam-buffer-toggle :which-key "Toggle buffer")
+  "n f" '(org-roam-node-find :which-key "Find node")
+  "n i" '(org-roam-node-insert :which-key "Insert node")
+  "n c" '(completion-at-point :which-key "Autocomplete")
+  "n s" '(org-roam-db-sync :which-key "Sync")
 
   ;; Undo-tree
   "u" '(undo-tree-visualize :which-key "Undo tree")
