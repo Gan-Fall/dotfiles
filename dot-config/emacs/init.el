@@ -591,12 +591,6 @@
   :after org
   :hook org-mode)
 
-(use-package visual-fill-column
-  :custom
-  (visual-fill-column-width 100)
-  (visual-fill-column-center-text t)
-  :hook org-mode)
-
 (use-package mixed-pitch
   :hook
   ;; If you want it in all text modes:
@@ -626,6 +620,7 @@
   :custom
   (org-roam-directory "~/Documents/org/roam")
   (org-roam-completion-everywhere t)
+  (org-roam-node-display-template "${directories:20} ${title:*} ${tags:10}")
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
@@ -633,11 +628,20 @@
          :map org-mode-map
          ("C-M-i" . completion-at-point))
   :config
+  (cl-defmethod org-roam-node-directories ((node org-roam-node))
+    (if-let ((dirs (file-name-directory (file-relative-name (org-roam-node-file node) org-roam-directory))))
+      (format "@%s" (car (split-string dirs "/")))
+      ""))
   (org-roam-setup))
 
 (use-package undo-tree
   :custom
-  (undo-tree-enable-undo-in-region t))
+  (undo-tree-enable-undo-in-region t)
+  (undo-tree-auto-save-history nil)
+  :config
+  (add-hook 'prog-mode-hook
+	    (lambda ()
+	      (setq-local undo-tree-auto-save-history 't))))
 (global-undo-tree-mode 1)
 
 (defadvice undo-tree-make-history-save-file-name
