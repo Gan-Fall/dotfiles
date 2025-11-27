@@ -624,19 +624,27 @@
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
+         ("C-c n I" . org-roam-node-insert-immediate)
          ("C-c n s" . org-roam-db-sync)
          :map org-mode-map
          ("C-M-i" . completion-at-point))
   :config
   (cl-defmethod org-roam-node-directories ((node org-roam-node))
     (if-let ((dirs (file-name-directory (file-relative-name (org-roam-node-file node) org-roam-directory))))
-      (format "@%s" (car (split-string dirs "/")))
+	(format "@%s" (car (split-string dirs "/")))
       ""))
+  (defun org-roam-node-insert-immediate (arg &rest args)
+    (interactive "P")
+    (let ((args (cons arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                    '(:immediate-finish t)))))
+      (apply #'org-roam-node-insert args)))
   (org-roam-setup))
 
 (use-package undo-tree
   :custom
   (undo-tree-enable-undo-in-region t)
+  (undo-tree-history-directory-alist '(("." . "~/.config/emacs/undotree")))
   (undo-tree-auto-save-history nil)
   :config
   (add-hook 'prog-mode-hook
@@ -724,6 +732,7 @@
   "n l" '(org-roam-buffer-toggle :which-key "Toggle buffer")
   "n f" '(org-roam-node-find :which-key "Find node")
   "n i" '(org-roam-node-insert :which-key "Insert node")
+  "n I" '(org-roam-node-insert-immediate :which-key "Insert node")
   "n c" '(completion-at-point :which-key "Autocomplete")
   "n s" '(org-roam-db-sync :which-key "Sync")
 
