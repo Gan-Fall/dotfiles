@@ -1,2 +1,6 @@
 alias emacsale="emacsclient -c -a 'emacs'"
-alias rsync="rsync -avP"
+#alias rsync="rsync -avP"
+alias yt-dl-audio="yt-dlp -x -f bestaudio"
+alias yt-dl-audio-thumbnail="yt-dlp -x -f bestaudio[ext=m4a] --add-metadata --embed-thumbnail"
+alias yt-dl-playlist="yt-dlp --ignore-errors --continue --no-overwrites --download-archive playlist.txt"
+alias emacs-reboot="pkill -x emacs ; emacs --daemon"

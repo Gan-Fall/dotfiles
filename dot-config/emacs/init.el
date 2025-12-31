@@ -735,6 +735,8 @@
   "n I" '(org-roam-node-insert-immediate :which-key "Insert node")
   "n c" '(completion-at-point :which-key "Autocomplete")
   "n s" '(org-roam-db-sync :which-key "Sync")
+  "n t" '(org-roam-tag-add :which-key "Add Tag")
+  "n r" '(org-roam-tag-remove :which-key "Remove Tag")
 
   ;; Undo-tree
   "u" '(undo-tree-visualize :which-key "Undo tree")
