@@ -35,6 +35,10 @@ vim.keymap.set("n", "<leader>f", function ()
     vim.lsp.buf.format()
 end)
 
+vim.keymap.set("n", "<leader>r", function ()
+    vim.lsp.buf.rename()
+end)
+
 --TODO: Learn quickfix
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
